@@ -7,7 +7,7 @@ import { Context } from "../../contex/contex";
 const Main = () => {
   const {
     onSent,
-    recentPrompt,
+    recentPromt,
     showResult,
     loading,
     resultData,
@@ -52,12 +52,19 @@ const Main = () => {
           <div className="result">
             <div className="result-title">
               <img src={assets.user_icon} alt="" />
-              <p>{recentPrompt}</p>
+              <p>{recentPromt}</p>
             </div>
             <div className="result-data">
               <img src={assets.gemini_icon} alt="" />
-              <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
-
+              {loading ? (
+                <div className="loader">
+                  <hr />
+                  <hr />
+                  <hr />
+                </div>
+              ) : (
+                <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
+              )}
             </div>
           </div>
         )}
@@ -73,7 +80,9 @@ const Main = () => {
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
-              <img onClick={() => onSent()} src={assets.send_icon} alt="" />
+              {inpute ? (
+                <img onClick={() => onSent()} src={assets.send_icon} alt="" />
+              ) : null}
             </div>
           </div>
           <p className="bottom-info">
